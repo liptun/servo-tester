@@ -1,41 +1,61 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <Arduino.h>
+#include <Encoder.h>
 #include <Wire.h>
 
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
+#define OLED_RESET -1
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire);
+#define CLK_PIN 2
+#define DT_PIN 3
+#define SW_PIN 4
+#define STEPS_PER_CLICK 2
+
+Encoder encoder(CLK_PIN, DT_PIN);
+long position = 0;
+long lastPosition = 0;
+int counter = 0;
 
 void setup() {
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C); // I2C address 0x78
+  pinMode(SW_PIN, INPUT_PULLUP);
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(0, 0);
-  display.println("Hello OLED!");
+  display.print("Counter: ");
+  display.println(position);
   display.display();
 }
 
-int counter = 0;
-unsigned long previousMillis = 0;
-const unsigned long interval = 50;
-
 void loop() {
-  unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= interval) {
-    previousMillis = currentMillis;
+  long newPosition = encoder.read() / STEPS_PER_CLICK;
 
-    counter++;
-
+  if (newPosition != lastPosition) {
+    if (newPosition < lastPosition) {
+      counter += 1;
+    } else {
+      counter -= 1;
+    }
+    position = newPosition;
     display.clearDisplay();
     display.setCursor(0, 0);
     display.print("Counter: ");
     display.println(counter);
-    display.println("");
-    display.println("millis");
-    display.println(currentMillis);
     display.display();
+    lastPosition = newPosition;
+  }
+
+  if (digitalRead(SW_PIN) == LOW) {
+    position = 0;
+    display.clearDisplay();
+    display.setCursor(0, 0);
+    display.print("Counter: ");
+    display.println(position);
+    display.display();
+    delay(200);
   }
 }
