@@ -31,8 +31,14 @@ void setup() {
   display.display();
 }
 
+unsigned long lastMillis = 0;
+const int intervalMs = 50;
+bool lastButtonState = HIGH;
+
 void loop() {
   long newPosition = encoder.read() / STEPS_PER_CLICK;
+  unsigned long currentMillis = millis();
+  bool buttonState = digitalRead(SW_PIN);
 
   if (newPosition != lastPosition) {
     if (newPosition < lastPosition) {
@@ -41,21 +47,21 @@ void loop() {
       counter -= 1;
     }
     position = newPosition;
+    lastPosition = newPosition;
+  }
+
+  if (lastButtonState == HIGH && buttonState == LOW) {
+      counter = 0;
+  }
+
+  if (currentMillis - lastMillis >= intervalMs) {
+    lastMillis = currentMillis;
     display.clearDisplay();
     display.setCursor(0, 0);
     display.print("Counter: ");
     display.println(counter);
     display.display();
-    lastPosition = newPosition;
   }
 
-  if (digitalRead(SW_PIN) == LOW) {
-    position = 0;
-    display.clearDisplay();
-    display.setCursor(0, 0);
-    display.print("Counter: ");
-    display.println(position);
-    display.display();
-    delay(200);
-  }
+  lastButtonState = buttonState;
 }
