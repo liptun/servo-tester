@@ -150,7 +150,133 @@
         "output": ".pio/build/nanoatmega328/FrameworkArduino/wiring_shift.c.o"
     },
     {
-        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/nanoatmega328/src/main.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -Iinclude -Isrc -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs src/main.cpp",
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/nanoatmega328/libb3c/Servo/avr/Servo.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/nanoatmega328/Servo/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs .pio/libdeps/nanoatmega328/Servo/src/avr/Servo.cpp",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Servo/src/avr/Servo.cpp",
+        "output": ".pio/build/nanoatmega328/libb3c/Servo/avr/Servo.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/nanoatmega328/libb3c/Servo/mbed/Servo.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/nanoatmega328/Servo/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs .pio/libdeps/nanoatmega328/Servo/src/mbed/Servo.cpp",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Servo/src/mbed/Servo.cpp",
+        "output": ".pio/build/nanoatmega328/libb3c/Servo/mbed/Servo.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/nanoatmega328/libb3c/Servo/megaavr/Servo.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/nanoatmega328/Servo/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs .pio/libdeps/nanoatmega328/Servo/src/megaavr/Servo.cpp",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Servo/src/megaavr/Servo.cpp",
+        "output": ".pio/build/nanoatmega328/libb3c/Servo/megaavr/Servo.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/nanoatmega328/libb3c/Servo/nrf52/Servo.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/nanoatmega328/Servo/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs .pio/libdeps/nanoatmega328/Servo/src/nrf52/Servo.cpp",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Servo/src/nrf52/Servo.cpp",
+        "output": ".pio/build/nanoatmega328/libb3c/Servo/nrf52/Servo.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/nanoatmega328/libb3c/Servo/renesas/Servo.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/nanoatmega328/Servo/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs .pio/libdeps/nanoatmega328/Servo/src/renesas/Servo.cpp",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Servo/src/renesas/Servo.cpp",
+        "output": ".pio/build/nanoatmega328/libb3c/Servo/renesas/Servo.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/nanoatmega328/libb3c/Servo/sam/Servo.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/nanoatmega328/Servo/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs .pio/libdeps/nanoatmega328/Servo/src/sam/Servo.cpp",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Servo/src/sam/Servo.cpp",
+        "output": ".pio/build/nanoatmega328/libb3c/Servo/sam/Servo.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/nanoatmega328/libb3c/Servo/samd/Servo.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/nanoatmega328/Servo/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs .pio/libdeps/nanoatmega328/Servo/src/samd/Servo.cpp",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Servo/src/samd/Servo.cpp",
+        "output": ".pio/build/nanoatmega328/libb3c/Servo/samd/Servo.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/nanoatmega328/libb3c/Servo/stm32f4/Servo.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/nanoatmega328/Servo/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs .pio/libdeps/nanoatmega328/Servo/src/stm32f4/Servo.cpp",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Servo/src/stm32f4/Servo.cpp",
+        "output": ".pio/build/nanoatmega328/libb3c/Servo/stm32f4/Servo.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/nanoatmega328/libb3c/Servo/xmc/Servo.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/nanoatmega328/Servo/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs .pio/libdeps/nanoatmega328/Servo/src/xmc/Servo.cpp",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Servo/src/xmc/Servo.cpp",
+        "output": ".pio/build/nanoatmega328/libb3c/Servo/xmc/Servo.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/nanoatmega328/lib57c/Wire/Wire.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs /Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src/Wire.cpp",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": "/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src/Wire.cpp",
+        "output": ".pio/build/nanoatmega328/lib57c/Wire/Wire.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/nanoatmega328/lib57c/Wire/utility/twi.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs /Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src/utility/twi.c",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": "/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src/utility/twi.c",
+        "output": ".pio/build/nanoatmega328/lib57c/Wire/utility/twi.c.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/nanoatmega328/libceb/SPI/SPI.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs /Users/liptun/.platformio/packages/framework-arduino-avr/libraries/SPI/src/SPI.cpp",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": "/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/SPI/src/SPI.cpp",
+        "output": ".pio/build/nanoatmega328/libceb/SPI/SPI.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o \".pio/build/nanoatmega328/lib322/Adafruit BusIO/Adafruit_BusIO_Register.cpp.o\" -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 \"-I.pio/libdeps/nanoatmega328/Adafruit BusIO\" -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs \".pio/libdeps/nanoatmega328/Adafruit BusIO/Adafruit_BusIO_Register.cpp\"",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Adafruit BusIO/Adafruit_BusIO_Register.cpp",
+        "output": ".pio/build/nanoatmega328/lib322/Adafruit BusIO/Adafruit_BusIO_Register.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o \".pio/build/nanoatmega328/lib322/Adafruit BusIO/Adafruit_GenericDevice.cpp.o\" -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 \"-I.pio/libdeps/nanoatmega328/Adafruit BusIO\" -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs \".pio/libdeps/nanoatmega328/Adafruit BusIO/Adafruit_GenericDevice.cpp\"",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Adafruit BusIO/Adafruit_GenericDevice.cpp",
+        "output": ".pio/build/nanoatmega328/lib322/Adafruit BusIO/Adafruit_GenericDevice.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o \".pio/build/nanoatmega328/lib322/Adafruit BusIO/Adafruit_I2CDevice.cpp.o\" -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 \"-I.pio/libdeps/nanoatmega328/Adafruit BusIO\" -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs \".pio/libdeps/nanoatmega328/Adafruit BusIO/Adafruit_I2CDevice.cpp\"",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Adafruit BusIO/Adafruit_I2CDevice.cpp",
+        "output": ".pio/build/nanoatmega328/lib322/Adafruit BusIO/Adafruit_I2CDevice.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o \".pio/build/nanoatmega328/lib322/Adafruit BusIO/Adafruit_SPIDevice.cpp.o\" -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 \"-I.pio/libdeps/nanoatmega328/Adafruit BusIO\" -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs \".pio/libdeps/nanoatmega328/Adafruit BusIO/Adafruit_SPIDevice.cpp\"",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Adafruit BusIO/Adafruit_SPIDevice.cpp",
+        "output": ".pio/build/nanoatmega328/lib322/Adafruit BusIO/Adafruit_SPIDevice.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o \".pio/build/nanoatmega328/libbe1/Adafruit GFX Library/Adafruit_GFX.cpp.o\" -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 \"-I.pio/libdeps/nanoatmega328/Adafruit GFX Library\" \"-I.pio/libdeps/nanoatmega328/Adafruit BusIO\" -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs \".pio/libdeps/nanoatmega328/Adafruit GFX Library/Adafruit_GFX.cpp\"",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Adafruit GFX Library/Adafruit_GFX.cpp",
+        "output": ".pio/build/nanoatmega328/libbe1/Adafruit GFX Library/Adafruit_GFX.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o \".pio/build/nanoatmega328/libbe1/Adafruit GFX Library/Adafruit_GrayOLED.cpp.o\" -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 \"-I.pio/libdeps/nanoatmega328/Adafruit GFX Library\" \"-I.pio/libdeps/nanoatmega328/Adafruit BusIO\" -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs \".pio/libdeps/nanoatmega328/Adafruit GFX Library/Adafruit_GrayOLED.cpp\"",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Adafruit GFX Library/Adafruit_GrayOLED.cpp",
+        "output": ".pio/build/nanoatmega328/libbe1/Adafruit GFX Library/Adafruit_GrayOLED.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o \".pio/build/nanoatmega328/libbe1/Adafruit GFX Library/Adafruit_SPITFT.cpp.o\" -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 \"-I.pio/libdeps/nanoatmega328/Adafruit GFX Library\" \"-I.pio/libdeps/nanoatmega328/Adafruit BusIO\" -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs \".pio/libdeps/nanoatmega328/Adafruit GFX Library/Adafruit_SPITFT.cpp\"",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Adafruit GFX Library/Adafruit_SPITFT.cpp",
+        "output": ".pio/build/nanoatmega328/libbe1/Adafruit GFX Library/Adafruit_SPITFT.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o \".pio/build/nanoatmega328/libbe1/Adafruit GFX Library/glcdfont.c.o\" -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 \"-I.pio/libdeps/nanoatmega328/Adafruit GFX Library\" \"-I.pio/libdeps/nanoatmega328/Adafruit BusIO\" -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs \".pio/libdeps/nanoatmega328/Adafruit GFX Library/glcdfont.c\"",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Adafruit GFX Library/glcdfont.c",
+        "output": ".pio/build/nanoatmega328/libbe1/Adafruit GFX Library/glcdfont.c.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o \".pio/build/nanoatmega328/lib0a0/Adafruit SSD1306/Adafruit_SSD1306.cpp.o\" -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 \"-I.pio/libdeps/nanoatmega328/Adafruit SSD1306\" \"-I.pio/libdeps/nanoatmega328/Adafruit GFX Library\" \"-I.pio/libdeps/nanoatmega328/Adafruit BusIO\" -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs \".pio/libdeps/nanoatmega328/Adafruit SSD1306/Adafruit_SSD1306.cpp\"",
+        "directory": "/Users/liptun/Dev/arduino/servo-tester",
+        "file": ".pio/libdeps/nanoatmega328/Adafruit SSD1306/Adafruit_SSD1306.cpp",
+        "output": ".pio/build/nanoatmega328/lib0a0/Adafruit SSD1306/Adafruit_SSD1306.cpp.o"
+    },
+    {
+        "command": "/Users/liptun/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/nanoatmega328/src/main.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_NANO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -Iinclude -Isrc \"-I.pio/libdeps/nanoatmega328/Adafruit SSD1306\" \"-I.pio/libdeps/nanoatmega328/Adafruit GFX Library\" \"-I.pio/libdeps/nanoatmega328/Adafruit BusIO\" -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/libraries/Wire/src -I.pio/libdeps/nanoatmega328/Servo/src -I/Users/liptun/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/liptun/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs src/main.cpp",
         "directory": "/Users/liptun/Dev/arduino/servo-tester",
         "file": "src/main.cpp",
         "output": ".pio/build/nanoatmega328/src/main.cpp.o"
