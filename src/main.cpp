@@ -13,14 +13,17 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 #define CLK_PIN 2
 #define DT_PIN 3
 #define SW_PIN 4
-#define STEPS_PER_CLICK 2
+#define STEPS_PER_CLICK 4
 
 #define TEST_SERVO_PIN 9
 Servo testServo;
 Encoder encoder(CLK_PIN, DT_PIN);
 long position = 0;
 long lastPosition = 0;
-int counter = 0;
+byte angle = 0;
+byte angleA = 0;
+byte angleB = 0;
+boolean isPrimaryAngleActive = true;
 
 unsigned long lastMillis = 0;
 const int intervalMs = 50;
@@ -59,25 +62,27 @@ void loop() {
     lastStepTime = currentMillis;
 
     int step = 1;
-    if (deltaT < 10)
-      step = 10; // super fast spin
-    else if (deltaT < 30)
-      step = 5; // fast
+    if (deltaT < 50)
+      step = 6;
     else if (deltaT < 100)
-      step = 2; // medium
+      step = 3;
+    else if (deltaT < 200)
+      step = 2;
     else
-      step = 1; // slow
+      step = 1;
 
-    counter += direction * step;
-    position = newPosition;
+    byte newAngle = constrain(angle + step * direction, 0, 180);
+    if (isPrimaryAngleActive) {
+      angleA = newAngle;
+    } else {
+      angleB = newAngle;
+    }
+    position = constrain(newPosition, 0, 180);
     lastPosition = newPosition;
-
-    Serial.print("Counter: ");
-    Serial.println(counter);
   }
 
   if (lastButtonState == HIGH && buttonState == LOW) {
-    counter = 0;
+    isPrimaryAngleActive = !isPrimaryAngleActive;
 
     Serial.println("Reset counter");
   }
@@ -86,11 +91,16 @@ void loop() {
     lastMillis = currentMillis;
     display.clearDisplay();
     display.setCursor(0, 0);
-    display.print("Counter: ");
-    display.println(counter);
+    display.print("Selection: ");
+    display.println(isPrimaryAngleActive ? "A" : "B");
+    display.println();
+    display.print("Angle: ");
+    display.print(angle);
+    display.println("deg");
     display.display();
   }
 
-  testServo.write(constrain(counter, 0, 180));
+  angle = isPrimaryAngleActive ? angleA : angleB;
+  testServo.write(angle);
   lastButtonState = buttonState;
 }
