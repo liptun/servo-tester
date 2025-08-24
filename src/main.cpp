@@ -1,6 +1,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <Arduino.h>
+#include <DisplayUtils.h>
 #include <Encoder.h>
 #include <Servo.h>
 #include <Wire.h>
@@ -18,7 +19,6 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 #define TEST_SERVO_PIN 9
 Servo testServo;
 Encoder encoder(CLK_PIN, DT_PIN);
-long position = 0;
 long lastPosition = 0;
 byte angle = 0;
 byte angleA = 0;
@@ -43,33 +43,12 @@ void setup() {
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(0, 0);
-  display.print("Counter: ");
-  display.println(position);
+  display.println("Servo");
+  display.println("Tester");
   display.display();
 
   testServo.attach(TEST_SERVO_PIN);
   testServo.write(0);
-}
-
-String displayAnge(boolean active, String label, int angle) {
-  const byte angleStringTargetLen = 3;
-  String output = "";
-  if (active) {
-    output += "[";
-    output += label;
-    output += "] ";
-  } else {
-    output += " ";
-    output += label;
-    output += "  ";
-  }
-
-  String angleStr = String(angle);
-  while (angleStr.length() < angleStringTargetLen)
-    angleStr = " " + angleStr;
-
-  output += angleStr + "deg";
-  return output;
 }
 
 void loop() {
@@ -99,7 +78,6 @@ void loop() {
     } else {
       angleB = newAngle;
     }
-    position = constrain(newPosition, 0, 180);
     lastPosition = newPosition;
   }
 
