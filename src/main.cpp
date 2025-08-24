@@ -2,6 +2,7 @@
 #include <Adafruit_SSD1306.h>
 #include <Arduino.h>
 #include <Encoder.h>
+#include <Servo.h>
 #include <Wire.h>
 
 #define SCREEN_WIDTH 128
@@ -14,6 +15,8 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 #define SW_PIN 4
 #define STEPS_PER_CLICK 2
 
+#define TEST_SERVO_PIN 9
+Servo testServo;
 Encoder encoder(CLK_PIN, DT_PIN);
 long position = 0;
 long lastPosition = 0;
@@ -28,7 +31,7 @@ unsigned long lastStepTime = 0;
 
 void setup() {
   pinMode(SW_PIN, INPUT_PULLUP);
-  Serial.begin(9600); 
+  Serial.begin(9600);
   Serial.println("Servo tester");
 
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
@@ -39,6 +42,9 @@ void setup() {
   display.print("Counter: ");
   display.println(position);
   display.display();
+
+  testServo.attach(TEST_SERVO_PIN);
+  testServo.write(0);
 }
 
 void loop() {
@@ -51,7 +57,6 @@ void loop() {
 
     unsigned long deltaT = currentMillis - lastStepTime;
     lastStepTime = currentMillis;
-
 
     int step = 1;
     if (deltaT < 10)
@@ -86,5 +91,6 @@ void loop() {
     display.display();
   }
 
+  testServo.write(constrain(counter, 0, 180));
   lastButtonState = buttonState;
 }
