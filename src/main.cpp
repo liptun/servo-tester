@@ -5,8 +5,8 @@
 #include <Servo.h>
 #include <Wire.h>
 
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 64
+#define SCREEN_WIDTH 64
+#define SCREEN_HEIGHT 32
 #define OLED_RESET -1
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
@@ -26,10 +26,11 @@ byte angleB = 0;
 boolean isPrimaryAngleActive = true;
 
 unsigned long lastMillis = 0;
-const int intervalMs = 50;
+const int renderIntervalMs = 50;
+const int debounceIntervalMs = 200;
+unsigned long lastDebounceMillis = 0;
 bool lastButtonState = HIGH;
 
-// for momentum
 unsigned long lastStepTime = 0;
 
 void setup() {
@@ -48,6 +49,27 @@ void setup() {
 
   testServo.attach(TEST_SERVO_PIN);
   testServo.write(0);
+}
+
+String displayAnge(boolean active, String label, int angle) {
+  const byte angleStringTargetLen = 3;
+  String output = "";
+  if (active) {
+    output += "[";
+    output += label;
+    output += "] ";
+  } else {
+    output += " ";
+    output += label;
+    output += "  ";
+  }
+
+  String angleStr = String(angle);
+  while (angleStr.length() < angleStringTargetLen)
+    angleStr = " " + angleStr;
+
+  output += angleStr + "deg";
+  return output;
 }
 
 void loop() {
@@ -81,22 +103,21 @@ void loop() {
     lastPosition = newPosition;
   }
 
-  if (lastButtonState == HIGH && buttonState == LOW) {
+  if (lastButtonState == LOW && buttonState == HIGH &&
+      currentMillis - lastDebounceMillis >= debounceIntervalMs) {
+    lastDebounceMillis = currentMillis;
     isPrimaryAngleActive = !isPrimaryAngleActive;
 
-    Serial.println("Reset counter");
+    Serial.println("Switch between A and B");
   }
 
-  if (currentMillis - lastMillis >= intervalMs) {
+  if (currentMillis - lastMillis >= renderIntervalMs) {
     lastMillis = currentMillis;
     display.clearDisplay();
     display.setCursor(0, 0);
-    display.print("Selection: ");
-    display.println(isPrimaryAngleActive ? "A" : "B");
     display.println();
-    display.print("Angle: ");
-    display.print(angle);
-    display.println("deg");
+    display.println(displayAnge(isPrimaryAngleActive, "A", angleA));
+    display.println(displayAnge(!isPrimaryAngleActive, "B", angleB));
     display.display();
   }
 
