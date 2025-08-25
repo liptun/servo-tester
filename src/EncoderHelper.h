@@ -1,5 +1,5 @@
-#include "Encoder.h"
 #define ENCODER_HELPER_H
+#include "Encoder.h"
 
 class EncoderHelper {
 
