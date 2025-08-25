@@ -15,8 +15,8 @@ void EncoderHelper::update() {
 
   long newPosition = encoder.read() / stepsPerClick;
   if (newPosition != lastPosition) {
-    int direction = (newPosition < lastPosition) ? ENCODER_DIRECTION_CC
-                                                 : ENCODER_DIRECTION_CW;
+    int direction = (newPosition < lastPosition) ? ENCODER_DIRECTION_CW
+                                                 : ENCODER_DIRECTION_CC;
     unsigned long deltaT = currentMillis - lastStepTime;
     lastStepTime = currentMillis;
     lastPosition = newPosition;
