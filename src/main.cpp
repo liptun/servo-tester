@@ -69,12 +69,11 @@ void setup() {
 
   Display.onRender = [](Adafruit_SSD1306 &display) {
     display.println();
-    display.println(displayServoPosition(isPrimaryAngleActive, "A",
-                                         isPulseMode ? pulseA : angleA,
-                                         isPulseMode ? "us" : "deg"));
+    display.println(displayServoPosition(
+        isPrimaryAngleActive, "A", isPulseMode ? pulseA : angleA, isPulseMode));
     display.println(displayServoPosition(!isPrimaryAngleActive, "B",
                                          isPulseMode ? pulseB : angleB,
-                                         isPulseMode ? "us" : "deg"));
+                                         isPulseMode));
   };
 }
 

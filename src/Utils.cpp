@@ -2,8 +2,8 @@
 #include <Config.h>
 
 String displayServoPosition(boolean active, String label, int angle,
-                            String unit) {
-  const byte angleStringTargetLen = 3;
+                            boolean isPulseMode) {
+  const byte angleStringTargetLen = isPulseMode ? 4 : 3;
   String output = "";
   if (active) {
     output += "[";
@@ -19,6 +19,7 @@ String displayServoPosition(boolean active, String label, int angle,
   while (angleStr.length() < angleStringTargetLen)
     angleStr = " " + angleStr;
 
+  String unit = isPulseMode ? "us" : "deg";
   output += angleStr + unit;
   return output;
 }

@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-String displayServoPosition(boolean active, String label, int angle, String unit);
+String displayServoPosition(boolean active, String label, int angle, boolean isPulseMode);
 
 int timeBasedStep(unsigned long deltaT);
 
