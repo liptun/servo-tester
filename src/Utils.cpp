@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-String displayAnge(boolean active, String label, int angle) {
+String displayAnge(boolean active, String label, int angle, String unit) {
   const byte angleStringTargetLen = 3;
   String output = "";
   if (active) {
@@ -17,7 +17,7 @@ String displayAnge(boolean active, String label, int angle) {
   while (angleStr.length() < angleStringTargetLen)
     angleStr = " " + angleStr;
 
-  output += angleStr + "deg";
+  output += angleStr + unit;
   return output;
 }
 

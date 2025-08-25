@@ -10,12 +10,19 @@
 #define SW_PIN 4
 #define STEPS_PER_CLICK 4
 
+#define NEUTAR_PULSE 1500
+#define NEUTAR_ANGLE 90
+
 #define TEST_SERVO_PIN 9
 Servo testServo;
-byte angle = 0;
-byte angleA = 0;
-byte angleB = 0;
+byte angle = NEUTAR_ANGLE;
+byte angleA = NEUTAR_ANGLE;
+byte angleB = NEUTAR_ANGLE;
+int pulse = NEUTAR_PULSE;
+int pulseA = NEUTAR_PULSE;
+int pulseB = NEUTAR_PULSE;
 boolean isPrimaryAngleActive = true;
+boolean isPulseMode = true;
 
 DisplayHelper Display;
 
@@ -31,26 +38,43 @@ void setup() {
 
   Encoder.onTurn = [](int8_t direction, unsigned long deltaT) {
     Serial.println("Turn " + String(direction) + " " + String(deltaT));
-    byte newAngle =
-        constrain(angle + timeBasedStep(deltaT) * direction, 0, 180);
-    if (isPrimaryAngleActive) {
-      angleA = newAngle;
+    if (isPulseMode) {
+      int newPulse = constrain(pulse + timeBasedStep(deltaT) * 10 * direction, 500, 2500);
+      if (isPrimaryAngleActive) {
+        pulseA = newPulse;
+      } else {
+        pulseB = newPulse;
+      }
     } else {
-      angleB = newAngle;
+      byte newAngle =
+          constrain(angle + timeBasedStep(deltaT) * direction, 0, 180);
+      if (isPrimaryAngleActive) {
+        angleA = newAngle;
+      } else {
+        angleB = newAngle;
+      }
     }
   };
 
   Encoder.onButtonClick = [](unsigned long pressDuration) {
     Serial.println("Click " + String(pressDuration));
-    isPrimaryAngleActive = !isPrimaryAngleActive;
+    if (pressDuration < 1000) {
+      isPrimaryAngleActive = !isPrimaryAngleActive;
+    } else {
+      isPulseMode = !isPulseMode;
+    }
   };
 
   Display.init();
 
   Display.onRender = [](Adafruit_SSD1306 &display) {
     display.println();
-    display.println(displayAnge(isPrimaryAngleActive, "A", angleA));
-    display.println(displayAnge(!isPrimaryAngleActive, "B", angleB));
+    display.println(displayAnge(isPrimaryAngleActive, "A",
+                                isPulseMode ? pulseA : angleA,
+                                isPulseMode ? "ms" : "deg"));
+    display.println(displayAnge(!isPrimaryAngleActive, "B",
+                                isPulseMode ? pulseB : angleB,
+                                isPulseMode ? "ms" : "deg"));
   };
 }
 
@@ -58,6 +82,11 @@ void loop() {
   Encoder.update();
   Display.update();
 
-  angle = isPrimaryAngleActive ? angleA : angleB;
-  testServo.write(angle);
+  if (isPulseMode) {
+    pulse = isPrimaryAngleActive ? pulseA : pulseB;
+    testServo.writeMicroseconds(pulse);
+  } else {
+    angle = isPrimaryAngleActive ? angleA : angleB;
+    testServo.write(angle);
+  }
 }
