@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <Config.h>
 #include <EncoderHelper.h>
 
 EncoderHelper::EncoderHelper(byte clkPin, byte dtPin, byte swPin,
@@ -14,7 +15,8 @@ void EncoderHelper::update() {
 
   long newPosition = encoder.read() / stepsPerClick;
   if (newPosition != lastPosition) {
-    int direction = (newPosition < lastPosition) ? 1 : -1;
+    int direction = (newPosition < lastPosition) ? ENCODER_DIRECTION_CC
+                                                 : ENCODER_DIRECTION_CW;
     unsigned long deltaT = currentMillis - lastStepTime;
     lastStepTime = currentMillis;
     lastPosition = newPosition;
@@ -25,12 +27,11 @@ void EncoderHelper::update() {
   }
 
   boolean buttonState = digitalRead(swPin);
-  int debounceIntervalMs = 50;
 
   if (buttonState == LOW && lastButtonState == HIGH) {
     lastDebounceMillis = currentMillis;
   } else if (buttonState == HIGH && lastButtonState == LOW &&
-             currentMillis - lastDebounceMillis >= debounceIntervalMs) {
+             currentMillis - lastDebounceMillis >= BUTTON_DEBOUNCE_DURATION) {
     unsigned long pressedDuration = currentMillis - lastDebounceMillis;
     if (onButtonClick) {
       onButtonClick(pressedDuration);

@@ -18,20 +18,21 @@ boolean isPulseMode = true;
 
 DisplayHelper Display;
 
-EncoderHelper Encoder(CLK_PIN, DT_PIN, SW_PIN, STEPS_PER_CLICK);
+EncoderHelper Encoder(ENCODER_CLK_PIN, ENCODER_DT_PIN, ENCODER_SW_PIN,
+                      ENCODER_STEPS_PER_CLICK);
 
 void setup() {
-  pinMode(SW_PIN, INPUT_PULLUP);
-  Serial.begin(9600);
+  pinMode(ENCODER_SW_PIN, INPUT_PULLUP);
+  Serial.begin(BAUD_RATE);
   Serial.println("Servo tester");
 
   testServo.attach(TEST_SERVO_PIN);
-  testServo.write(0);
 
   Encoder.onTurn = [](int8_t direction, unsigned long deltaT) {
     Serial.println("Turn " + String(direction) + " " + String(deltaT));
     if (isPulseMode) {
-      int newPulse = constrain(pulse + timeBasedStep(deltaT) * 10 * direction,
+      int newPulse = constrain(pulse + timeBasedStep(deltaT) *
+                                           MS_MODE_MULTIPLER * direction,
                                SERVO_MIN_US, SERVO_MAX_US);
       if (isPrimaryAngleActive) {
         pulseA = newPulse;
@@ -51,7 +52,7 @@ void setup() {
 
   Encoder.onButtonClick = [](unsigned long pressDuration) {
     Serial.println("Click " + String(pressDuration));
-    if (pressDuration < 1000) {
+    if (pressDuration < BUTTON_LONG_PRESS_DURATION) {
       isPrimaryAngleActive = !isPrimaryAngleActive;
     } else {
       if (isPulseMode) {
