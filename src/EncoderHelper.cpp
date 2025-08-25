@@ -25,12 +25,15 @@ void EncoderHelper::update() {
   }
 
   boolean buttonState = digitalRead(swPin);
-  int debounceIntervalMs = 200;
-  if (lastButtonState == LOW && buttonState == HIGH &&
-      currentMillis - lastDebounceMillis >= debounceIntervalMs) {
+  int debounceIntervalMs = 50;
+
+  if (buttonState == LOW && lastButtonState == HIGH) {
     lastDebounceMillis = currentMillis;
+  } else if (buttonState == HIGH && lastButtonState == LOW &&
+             currentMillis - lastDebounceMillis >= debounceIntervalMs) {
+    unsigned long pressedDuration = currentMillis - lastDebounceMillis;
     if (onButtonClick) {
-      onButtonClick();
+      onButtonClick(pressedDuration);
     }
   }
   lastButtonState = buttonState;

@@ -1,9 +1,9 @@
 #include "Adafruit_SSD1306.h"
 #include <Arduino.h>
 #include <DisplayHelper.h>
-#include <Utils.h>
 #include <EncoderHelper.h>
 #include <Servo.h>
+#include <Utils.h>
 
 #define CLK_PIN 2
 #define DT_PIN 3
@@ -40,8 +40,8 @@ void setup() {
     }
   };
 
-  Encoder.onButtonClick = []() {
-    Serial.println("Click");
+  Encoder.onButtonClick = [](unsigned long pressDuration) {
+    Serial.println("Click " + String(pressDuration));
     isPrimaryAngleActive = !isPrimaryAngleActive;
   };
 

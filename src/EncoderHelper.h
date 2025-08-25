@@ -8,7 +8,7 @@ public:
   void init();
   void update();
   void (*onTurn)(int8_t direction, unsigned long deltaT) = nullptr;
-  void (*onButtonClick)() = nullptr;
+  void (*onButtonClick)(unsigned long pressDuration) = nullptr;
 
 private:
   Encoder encoder;
