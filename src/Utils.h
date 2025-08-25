@@ -2,6 +2,9 @@
 
 #include <Arduino.h>
 
-String displayAnge(boolean active, String label, int angle, String unit);
+String displayServoPosition(boolean active, String label, int angle, String unit);
 
 int timeBasedStep(unsigned long deltaT);
+
+int degToPulse(int angle);
+int pulseToDeg(int pulse);

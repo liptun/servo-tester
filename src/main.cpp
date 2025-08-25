@@ -1,26 +1,18 @@
 #include "Adafruit_SSD1306.h"
 #include <Arduino.h>
+#include <Config.h>
 #include <DisplayHelper.h>
 #include <EncoderHelper.h>
 #include <Servo.h>
 #include <Utils.h>
 
-#define CLK_PIN 2
-#define DT_PIN 3
-#define SW_PIN 4
-#define STEPS_PER_CLICK 4
-
-#define NEUTAR_PULSE 1500
-#define NEUTAR_ANGLE 90
-
-#define TEST_SERVO_PIN 9
 Servo testServo;
-byte angle = NEUTAR_ANGLE;
-byte angleA = NEUTAR_ANGLE;
-byte angleB = NEUTAR_ANGLE;
-int pulse = NEUTAR_PULSE;
-int pulseA = NEUTAR_PULSE;
-int pulseB = NEUTAR_PULSE;
+byte angle = SERVO_NEUTAR_ANGLE;
+byte angleA = SERVO_NEUTAR_ANGLE;
+byte angleB = SERVO_NEUTAR_ANGLE;
+int pulse = SERVO_NEUTAR_PULSE;
+int pulseA = SERVO_NEUTAR_PULSE;
+int pulseB = SERVO_NEUTAR_PULSE;
 boolean isPrimaryAngleActive = true;
 boolean isPulseMode = true;
 
@@ -39,15 +31,16 @@ void setup() {
   Encoder.onTurn = [](int8_t direction, unsigned long deltaT) {
     Serial.println("Turn " + String(direction) + " " + String(deltaT));
     if (isPulseMode) {
-      int newPulse = constrain(pulse + timeBasedStep(deltaT) * 10 * direction, 500, 2500);
+      int newPulse = constrain(pulse + timeBasedStep(deltaT) * 10 * direction,
+                               SERVO_MIN_US, SERVO_MAX_US);
       if (isPrimaryAngleActive) {
         pulseA = newPulse;
       } else {
         pulseB = newPulse;
       }
     } else {
-      byte newAngle =
-          constrain(angle + timeBasedStep(deltaT) * direction, 0, 180);
+      byte newAngle = constrain(angle + timeBasedStep(deltaT) * direction,
+                                SERVO_MIN_ANGLE, SERVO_MAX_ANGLE);
       if (isPrimaryAngleActive) {
         angleA = newAngle;
       } else {
@@ -61,6 +54,13 @@ void setup() {
     if (pressDuration < 1000) {
       isPrimaryAngleActive = !isPrimaryAngleActive;
     } else {
+      if (isPulseMode) {
+        angleA = pulseToDeg(pulseA);
+        angleB = pulseToDeg(pulseB);
+      } else {
+        pulseA = degToPulse(angleA);
+        pulseB = degToPulse(angleB);
+      }
       isPulseMode = !isPulseMode;
     }
   };
@@ -69,12 +69,12 @@ void setup() {
 
   Display.onRender = [](Adafruit_SSD1306 &display) {
     display.println();
-    display.println(displayAnge(isPrimaryAngleActive, "A",
-                                isPulseMode ? pulseA : angleA,
-                                isPulseMode ? "ms" : "deg"));
-    display.println(displayAnge(!isPrimaryAngleActive, "B",
-                                isPulseMode ? pulseB : angleB,
-                                isPulseMode ? "ms" : "deg"));
+    display.println(displayServoPosition(isPrimaryAngleActive, "A",
+                                         isPulseMode ? pulseA : angleA,
+                                         isPulseMode ? "us" : "deg"));
+    display.println(displayServoPosition(!isPrimaryAngleActive, "B",
+                                         isPulseMode ? pulseB : angleB,
+                                         isPulseMode ? "us" : "deg"));
   };
 }
 
