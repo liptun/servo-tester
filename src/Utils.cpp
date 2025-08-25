@@ -21,3 +21,15 @@ String displayAnge(boolean active, String label, int angle) {
   return output;
 }
 
+int timeBasedStep(unsigned long deltaT) {
+  int step = 1;
+  if (deltaT < 50)
+    step = 6;
+  else if (deltaT < 100)
+    step = 3;
+  else if (deltaT < 200)
+    step = 2;
+  else
+    step = 1;
+  return step;
+}

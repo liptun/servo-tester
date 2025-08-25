@@ -1,7 +1,7 @@
 #include "Adafruit_SSD1306.h"
 #include <Arduino.h>
 #include <DisplayHelper.h>
-#include <DisplayUtils.h>
+#include <Utils.h>
 #include <EncoderHelper.h>
 #include <Servo.h>
 
@@ -20,19 +20,6 @@ boolean isPrimaryAngleActive = true;
 DisplayHelper Display;
 
 EncoderHelper Encoder(CLK_PIN, DT_PIN, SW_PIN, STEPS_PER_CLICK);
-
-int timeBasedStep(unsigned long deltaT) {
-  int step = 1;
-  if (deltaT < 50)
-    step = 6;
-  else if (deltaT < 100)
-    step = 3;
-  else if (deltaT < 200)
-    step = 2;
-  else
-    step = 1;
-  return step;
-}
 
 void setup() {
   pinMode(SW_PIN, INPUT_PULLUP);
