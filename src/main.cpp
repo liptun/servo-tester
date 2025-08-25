@@ -2,7 +2,7 @@
 #include <Adafruit_SSD1306.h>
 #include <Arduino.h>
 #include <DisplayUtils.h>
-#include <Encoder.h>
+#include <EncoderHelper.h>
 #include <Servo.h>
 #include <Wire.h>
 
@@ -18,8 +18,6 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 #define TEST_SERVO_PIN 9
 Servo testServo;
-Encoder encoder(CLK_PIN, DT_PIN);
-long lastPosition = 0;
 byte angle = 0;
 byte angleA = 0;
 byte angleB = 0;
@@ -27,11 +25,23 @@ boolean isPrimaryAngleActive = true;
 
 unsigned long lastMillis = 0;
 const int renderIntervalMs = 50;
-const int debounceIntervalMs = 200;
-unsigned long lastDebounceMillis = 0;
-bool lastButtonState = HIGH;
 
 unsigned long lastStepTime = 0;
+
+EncoderHelper Encoder(CLK_PIN, DT_PIN, SW_PIN, STEPS_PER_CLICK);
+
+int timeBasedStep(unsigned long deltaT) {
+  int step = 1;
+  if (deltaT < 50)
+    step = 6;
+  else if (deltaT < 100)
+    step = 3;
+  else if (deltaT < 200)
+    step = 2;
+  else
+    step = 1;
+  return step;
+}
 
 void setup() {
   pinMode(SW_PIN, INPUT_PULLUP);
@@ -49,45 +59,27 @@ void setup() {
 
   testServo.attach(TEST_SERVO_PIN);
   testServo.write(0);
-}
 
-void loop() {
-  long newPosition = encoder.read() / STEPS_PER_CLICK;
-  unsigned long currentMillis = millis();
-  bool buttonState = digitalRead(SW_PIN);
-
-  if (newPosition != lastPosition) {
-    int direction = (newPosition < lastPosition) ? 1 : -1;
-
-    unsigned long deltaT = currentMillis - lastStepTime;
-    lastStepTime = currentMillis;
-
-    int step = 1;
-    if (deltaT < 50)
-      step = 6;
-    else if (deltaT < 100)
-      step = 3;
-    else if (deltaT < 200)
-      step = 2;
-    else
-      step = 1;
-
-    byte newAngle = constrain(angle + step * direction, 0, 180);
+  Encoder.onTurn = [](int8_t direction, unsigned long deltaT) {
+    Serial.println("Turn " + String(direction) + " " + String(deltaT));
+    byte newAngle =
+        constrain(angle + timeBasedStep(deltaT) * direction, 0, 180);
     if (isPrimaryAngleActive) {
       angleA = newAngle;
     } else {
       angleB = newAngle;
     }
-    lastPosition = newPosition;
-  }
+  };
 
-  if (lastButtonState == LOW && buttonState == HIGH &&
-      currentMillis - lastDebounceMillis >= debounceIntervalMs) {
-    lastDebounceMillis = currentMillis;
+  Encoder.onButtonClick = []() {
+    Serial.println("Click");
     isPrimaryAngleActive = !isPrimaryAngleActive;
+  };
+}
 
-    Serial.println("Switch between A and B");
-  }
+void loop() {
+  Encoder.update();
+  unsigned long currentMillis = millis();
 
   if (currentMillis - lastMillis >= renderIntervalMs) {
     lastMillis = currentMillis;
@@ -101,5 +93,4 @@ void loop() {
 
   angle = isPrimaryAngleActive ? angleA : angleB;
   testServo.write(angle);
-  lastButtonState = buttonState;
 }
