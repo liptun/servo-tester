@@ -5,8 +5,6 @@
 EncoderHelper::EncoderHelper(byte clkPin, byte dtPin, byte swPin, byte stepsPerClick)
     : encoder(clkPin, dtPin), swPin(swPin), stepsPerClick(stepsPerClick), lastPosition(0), lastStepTime(0), lastButtonState(HIGH), lastDebounceMillis(0) {}
 
-void EncoderHelper::init() {}
-
 void EncoderHelper::update() {
   unsigned long currentMillis = millis();
 

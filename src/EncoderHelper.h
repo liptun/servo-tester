@@ -5,7 +5,6 @@ class EncoderHelper {
 
 public:
   EncoderHelper(byte clkPin, byte dtPin, byte swPin, byte stepsPerClick);
-  void init();
   void update();
   void (*onTurn)(int8_t direction, unsigned long deltaT) = nullptr;
   void (*onButtonClick)(unsigned long pressDuration) = nullptr;
