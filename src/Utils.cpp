@@ -1,8 +1,7 @@
 #include <Arduino.h>
 #include <Config.h>
 
-String displayServoPosition(boolean active, String label, int angle,
-                            boolean isPulseMode) {
+String displayServoPosition(boolean active, String label, int angle, boolean isPulseMode) {
   const byte angleStringTargetLen = isPulseMode ? 4 : 3;
   String output = "";
   if (active) {
@@ -39,12 +38,10 @@ int timeBasedStep(unsigned long deltaT) {
 
 int degToPulse(int angle) {
   angle = constrain(angle, SERVO_MIN_ANGLE, SERVO_MAX_ANGLE);
-  return map(angle, SERVO_MIN_ANGLE, SERVO_MAX_ANGLE, SERVO_MIN_US,
-             SERVO_MAX_US);
+  return map(angle, SERVO_MIN_ANGLE, SERVO_MAX_ANGLE, SERVO_MIN_US, SERVO_MAX_US);
 }
 
 int pulseToDeg(int pulse) {
   pulse = constrain(pulse, SERVO_MIN_US, SERVO_MAX_US);
-  return map(pulse, SERVO_MIN_US, SERVO_MAX_US, SERVO_MIN_ANGLE,
-             SERVO_MAX_ANGLE);
+  return map(pulse, SERVO_MIN_US, SERVO_MAX_US, SERVO_MIN_ANGLE, SERVO_MAX_ANGLE);
 }
