@@ -15,6 +15,10 @@ int pulseA = SERVO_NEUTAR_PULSE;
 int pulseB = SERVO_NEUTAR_PULSE;
 boolean isPrimaryAngleActive = true;
 boolean isPulseMode = true;
+boolean isSwingMode = false;
+int swingDuration = 1000;
+boolean isSwingForward = true;
+unsigned long lastPulseMillis = 0;
 
 DisplayHelper Display;
 
@@ -29,28 +33,44 @@ void setup() {
 
   Encoder.onTurn = [](int8_t direction, unsigned long deltaT) {
     Serial.println("Turn " + String(direction) + " " + String(deltaT));
-    if (isPulseMode) {
-      int newPulse = constrain(pulse + timeBasedStep(deltaT) * MS_MODE_MULTIPLER * direction, SERVO_MIN_US, SERVO_MAX_US);
-      if (isPrimaryAngleActive) {
-        pulseA = newPulse;
-      } else {
-        pulseB = newPulse;
-      }
+    if (isSwingMode) {
+      swingDuration = constrain(swingDuration + timeBasedStep(deltaT) * SWING_MODE_MULTIPLER * direction, SWING_DURATION_MIN, SWING_DURATION_MAX);
     } else {
-      byte newAngle = constrain(angle + timeBasedStep(deltaT) * direction, SERVO_MIN_ANGLE, SERVO_MAX_ANGLE);
-      if (isPrimaryAngleActive) {
-        angleA = newAngle;
+      if (isPulseMode) {
+        int newPulse = constrain(pulse + timeBasedStep(deltaT) * MS_MODE_MULTIPLER * direction, SERVO_MIN_US, SERVO_MAX_US);
+        if (isPrimaryAngleActive) {
+          pulseA = newPulse;
+        } else {
+          pulseB = newPulse;
+        }
+        Serial.println("newPulse " + String(newPulse));
       } else {
-        angleB = newAngle;
+        byte newAngle = constrain(angle + timeBasedStep(deltaT) * direction, SERVO_MIN_ANGLE, SERVO_MAX_ANGLE);
+        if (isPrimaryAngleActive) {
+          angleA = newAngle;
+        } else {
+          angleB = newAngle;
+        }
+        Serial.println("newAngle " + String(newAngle));
       }
     }
   };
 
   Encoder.onButtonClick = [](unsigned long pressDuration) {
+    Serial.println("__________________");
     Serial.println("Click " + String(pressDuration));
-    if (pressDuration < BUTTON_LONG_PRESS_DURATION) {
-      isPrimaryAngleActive = !isPrimaryAngleActive;
-    } else {
+    if (pressDuration > BUTTON_LONG_PRESS_DURATION) {
+      isSwingMode = !isSwingMode;
+      Serial.print("Long press: ");
+      Serial.println(isSwingMode ? "swing" : "normal");
+      if (isSwingMode) {
+        if (isPulseMode == false) {
+          isPulseMode = true;
+          pulseA = degToPulse(angleA);
+          pulseB = degToPulse(angleB);
+        }
+      }
+    } else if (pressDuration > BUTTON_SHORT_PRESS_DURATION) {
       if (isPulseMode) {
         angleA = pulseToDeg(pulseA);
         angleB = pulseToDeg(pulseB);
@@ -59,15 +79,31 @@ void setup() {
         pulseB = degToPulse(angleB);
       }
       isPulseMode = !isPulseMode;
+
+      Serial.print("Short press: ");
+      Serial.println(isPulseMode ? "pulse" : "deg");
+    } else {
+      Serial.print("Click: ");
+      isPrimaryAngleActive = !isPrimaryAngleActive;
+      Serial.println(isPrimaryAngleActive ? "primary" : "secondary");
     }
   };
 
   Display.init();
 
   Display.onRender = [](Adafruit_SSD1306 &display) {
-    display.println();
-    display.println(displayServoPosition(isPrimaryAngleActive, "A", isPulseMode ? pulseA : angleA, isPulseMode));
-    display.println(displayServoPosition(!isPrimaryAngleActive, "B", isPulseMode ? pulseB : angleB, isPulseMode));
+    display.println(isSwingMode ? "Swing" : "Manual");
+    if (isSwingMode) {
+
+      display.println("Dur " + digit(swingDuration, 4) + "ms");
+
+      display.print(isSwingForward ? " >>" : " <<");
+      display.println(" " + digit(pulse, 4) + "ms");
+
+    } else {
+      display.println(displayServoPosition(isPrimaryAngleActive, "A", isPulseMode ? pulseA : angleA, isPulseMode));
+      display.println(displayServoPosition(!isPrimaryAngleActive, "B", isPulseMode ? pulseB : angleB, isPulseMode));
+    }
   };
 }
 
@@ -75,11 +111,31 @@ void loop() {
   Encoder.update();
   Display.update();
 
-  if (isPulseMode) {
-    pulse = isPrimaryAngleActive ? pulseA : pulseB;
+  if (isSwingMode) {
+    unsigned long currentPulseMillis = millis();
+    if (currentPulseMillis - lastPulseMillis >= swingDuration) {
+      lastPulseMillis = currentPulseMillis;
+      isSwingForward = !isSwingForward;
+    }
+
+    float progress = float(currentPulseMillis - lastPulseMillis) / float(swingDuration);
+    if (progress > 1.0)
+      progress = 1.0;
+
+    if (isSwingForward) {
+      pulse = lerp(pulseA, pulseB, progress);
+    } else {
+      pulse = lerp(pulseB, pulseA, progress);
+    }
     testServo.writeMicroseconds(pulse);
+
   } else {
-    angle = isPrimaryAngleActive ? angleA : angleB;
-    testServo.write(angle);
+    if (isPulseMode) {
+      pulse = isPrimaryAngleActive ? pulseA : pulseB;
+      testServo.writeMicroseconds(pulse);
+    } else {
+      angle = isPrimaryAngleActive ? angleA : angleB;
+      testServo.write(angle);
+    }
   }
 }

@@ -23,6 +23,13 @@ String displayServoPosition(boolean active, String label, int angle, boolean isP
   return output;
 }
 
+String digit(int number, int digits) {
+  String numberStr = String(number);
+  while (numberStr.length() < digits)
+    numberStr = " " + numberStr;
+  return numberStr;
+}
+
 int timeBasedStep(unsigned long deltaT) {
   int step = 1;
   if (deltaT < 50)
@@ -44,4 +51,8 @@ int degToPulse(int angle) {
 int pulseToDeg(int pulse) {
   pulse = constrain(pulse, SERVO_MIN_US, SERVO_MAX_US);
   return map(pulse, SERVO_MIN_US, SERVO_MAX_US, SERVO_MIN_ANGLE, SERVO_MAX_ANGLE);
+}
+
+int lerp(int a, int b, float t) {
+  return a + (int)((b - a) * t);
 }
